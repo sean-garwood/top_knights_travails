@@ -3,13 +3,9 @@
 # determine position relative to destination
 module Position
   def find_quad
-    return right_side? && 1 || 2 if top_half?
+    return right_side? && 0 || 1 if top_half?
 
-    left_side? && 3 || 4
-  end
-
-  def rel_pos(dest, &coord)
-    coord.call(self) <=> coord.call(dest)
+    left_side? && 2 || 3
   end
 
   def bottom_half?
