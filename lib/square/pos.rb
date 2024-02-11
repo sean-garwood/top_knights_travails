@@ -2,22 +2,14 @@
 
 # determine position relative to destination
 module Position
-  DOWN = :-
-  LEFT = DOWN
-  UP = :+
-  RIGHT = UP
   def find_quad
     return right_side? && 1 || 2 if top_half?
 
     left_side? && 3 || 4
   end
 
-  def relative_position(dest)
-    return if same_square?(dest) || same_row?(dest) || same_col?(dest)
-
-    return below?(dest) && [LEFT, DOWN] || [LEFT, UP] if left_of?(dest)
-
-    below?(dest) && [RIGHT, DOWN] || [RIGHT, UP]
+  def rel_pos(dest, &coord)
+    coord.call(self) <=> coord.call(dest)
   end
 
   def bottom_half?
