@@ -5,4 +5,4 @@ require_relative 'lib/square'
 
 COLS = (0..7).freeze
 
-puts Board.new([0,0], [1,1])
+puts Board.new

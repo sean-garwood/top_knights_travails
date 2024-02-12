@@ -4,18 +4,23 @@ require_relative 'square/move'
 require_relative 'square/pos'
 
 # represent each square on a chessboard
-class Square < Board
+class Square
   include Move
   include Position
-  attr_accessor :distance, :visited
+  attr_accessor :distance
   attr_reader :coordinates, :x, :y, :moves
 
-  def initialize(coordinates = [0, 0])
+  def initialize(coordinates, distance = MAX_DISTANCE)
     @coordinates = coordinates
+    @distance = distance
     @x = coordinates[0]
     @y = coordinates[1]
     @moves = legal_moves
-    @distance = MAX_DISTANCE # number of moves to target. Assumed to be max at init
-    @visited = nil
+  end
+
+  private
+
+  def to_s
+    "#{x}, #{y}\ndistance to knight: #{distance}"
   end
 end
