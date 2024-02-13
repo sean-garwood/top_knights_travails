@@ -2,7 +2,6 @@
 
 # determine position relative to destination
 module Position
-  MAX_DISTANCE = 6
   MIN_DISTANCE = 0
   def next_to_target?(square)
     square.moves.include?(target.coordinates)

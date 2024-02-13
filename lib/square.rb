@@ -4,7 +4,6 @@ require_relative 'square/move'
 
 # represent each square on a chessboard
 class Square
-  include Move
   attr_accessor :distance
   attr_reader :coordinates, :x, :y, :moves
 
@@ -13,11 +12,12 @@ class Square
     @distance = distance
     @x = coordinates[0]
     @y = coordinates[1]
-    @moves = moves
+    @moves = legal_moves
   end
 
   private
 
+  include Move
   def to_s
     "#{x}, #{y}\ndistance to knight: #{distance}"
   end

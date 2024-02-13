@@ -9,10 +9,18 @@ class Board
   attr_reader :knight, :target
 
   def initialize
-    @knight = Square.new(coordinates_of('knight'), 0)
-    @target = Square.new(coordinates_of('target'))
+    @knight = Square.new([0, 0], 0)
+    @target = Square.new([7, 7])
     @visited = [@knight]
     @unvisited = make_board
+  end
+
+  def visit_neighbors(square)
+    square.moves.each do |move|
+      curr = unvisited.select { |s| s.coordinates == move }[0]
+      visited << unvisited.delete(curr)
+      curr.distance > square.distance ? curr.distance = square.distance + 1 : nil
+    end
   end
 
   private
@@ -23,5 +31,6 @@ class Board
     unvisited.each do |square|
       puts square
     end
+    "visited: #{visited}"
   end
 end
