@@ -10,16 +10,15 @@ class Board
 
   def initialize
     @knight = Square.new([0, 0], 0)
-    @target = Square.new([7, 7])
+    @target = Square.new([1, 2])
     @visited = [@knight]
     @unvisited = make_board
   end
 
-  def visit_neighbors(square)
-    square.moves.each do |move|
-      curr = unvisited.select { |s| s.coordinates == move }[0]
-      visited << unvisited.delete(curr)
-      curr.distance > square.distance ? curr.distance = square.distance + 1 : nil
+  def visit_all
+    loop do
+      visit_neighbors(visited[-1])
+      break if visited.map(&:coordinates).include?(target.coordinates)
     end
   end
 
@@ -27,6 +26,20 @@ class Board
 
   include Empty
   include Position
+  def visit_neighbors(square)
+    unvisited_neighbors(square).each do |neighbor|
+      visited << unvisited.delete(neighbor)
+      puts neighbor.coordinates
+      neighbor.distance > square.distance ? neighbor.distance = square.distance + 1 : nil
+    end
+  end
+
+  def unvisited_neighbors(square)
+    candidates = square.moves
+    candidates.select { |move| unvisited_coords.include?(move) }
+    unvisited.select { |sq| candidates.include?(sq.coordinates) }
+  end
+
   def to_s
     unvisited.each do |square|
       puts square

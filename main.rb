@@ -7,6 +7,6 @@ COLS = (0..7).freeze
 
 chess = Board.new
 
-chess.visit_neighbors(chess.knight)
+chess.visit_all
 
 puts chess

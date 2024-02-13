@@ -15,14 +15,17 @@ module Empty
     rows = COLS
     COLS.each do |col|
       rows.each do |row|
-        result << [row, col]
+        result << [row, col] unless [row, col] == knight.coordinates
       end
     end
     result
   end
 
   def make_board
-    remaining_coords = coords.reject { |coord| coord == knight.coordinates }
-    remaining_coords.map { |coord| Square.new(coord) }
+    coords.map { |coord| Square.new(coord) }
+  end
+
+  def unvisited_coords
+    unvisited.reduce([]) { |coords, square| coords << square.coordinates }
   end
 end
