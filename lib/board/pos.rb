@@ -4,11 +4,11 @@
 module Position
   MAX_DISTANCE = 6
   MIN_DISTANCE = 0
-  def next_to_target?
-    moves.include?(target)
+  def next_to_target?(square)
+    square.moves.include?(target.coordinates)
   end
 
-  def target?
-    self == target
+  def target?(square)
+    square.coordinates == target.coordinates
   end
 end

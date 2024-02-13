@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'board/empty'
+require_relative 'board/pos'
 
 # this will be the total space of the chessboard, where n in (2..64)
 class Board
@@ -17,6 +18,7 @@ class Board
   private
 
   include Empty
+  include Position
   def to_s
     unvisited.each do |square|
       puts square

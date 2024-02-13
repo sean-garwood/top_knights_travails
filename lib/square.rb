@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 require_relative 'square/move'
-require_relative 'square/pos'
 
 # represent each square on a chessboard
 class Square
   include Move
-  include Position
   attr_accessor :distance
   attr_reader :coordinates, :x, :y, :moves
 
@@ -15,7 +13,7 @@ class Square
     @distance = distance
     @x = coordinates[0]
     @y = coordinates[1]
-    @moves = legal_moves
+    @moves = moves
   end
 
   private
