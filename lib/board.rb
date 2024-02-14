@@ -12,7 +12,7 @@ class Board
     @knight = Square.new([0, 0], 0)
     @target = Square.new([1, 2])
     @visited = [@knight]
-    @unvisited = make_board
+    @unvisited = coords
   end
 
   def visit_all
@@ -29,8 +29,7 @@ class Board
   def visit_neighbors(square)
     unvisited_neighbors(square).each do |neighbor|
       visited << unvisited.delete(neighbor)
-      puts neighbor.coordinates
-      neighbor.distance > square.distance ? neighbor.distance = square.distance + 1 : nil
+      neighbor.distance > square.distance && neighbor.distance = square.distance + 1
     end
   end
 
@@ -41,9 +40,6 @@ class Board
   end
 
   def to_s
-    unvisited.each do |square|
-      puts square
-    end
-    "visited: #{visited}"
+    "visited: #{visited.map(&:coordinates)}"
   end
 end
