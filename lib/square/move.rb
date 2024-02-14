@@ -2,19 +2,42 @@
 
 # choose next square
 module Move
+  COLS = (0..7).freeze
   MAX_DISTANCE = 6
+  MIN_DISTANCE = 0
   MOVES = [
     [1, 2], [2, 1], [-1, 2], [-2, 1], [1, -2], [2, -1], [-1, -2], [-2, -1]
   ].freeze
 
-  def legal_moves
-    move_by_values = MOVES
-    new_coords = proc do |move_x, move_y|
-      coord = [x + move_x, y + move_y]
-      coord if COLS.include?(coord[0]) && COLS.include?(coord[1])
+  def coords
+    result = []
+    cols = COLS
+    rows = cols
+    COLS.each do |col|
+      rows.each do |row|
+        result << [row, col]
+      end
     end
-    move_by_values.reduce([]) do |moves, move|
-      moves << new_coords.call(move[0], move[1])
-    end.compact
+    result
+  end
+
+  def moves
+    moves = MOVES
+    t = proc { |dx, dy| [x + dx, y + dy] }
+    moves.reduce([]) do |legal, move|
+      new_move = t.call(move)
+
+      legal << new_move if new_move.all? { |coord| COLS.include?(coord) }
+      legal
+    end
+  end
+
+  def id_neighbors
+    adj_squares = moves
+  end
+
+  def find_path
+    squares = visit_all
+
   end
 end
