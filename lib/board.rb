@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
+require_relative 'board/output'
+
 # this will be the total space of the chessboard, where n in (2..64)
 class Board
   include Move
+  include Output
   attr_reader :path
 
-  def initialize(knight = Debug::K_POS, target = Debug::T_POS)
+  def initialize(knight = [0, 7], target = [7, 0])
     @squares = fill_board
     @unvisited = @squares
     @visited = []
@@ -54,42 +57,5 @@ class Board
       square > target
     end
     on_path.map(&:coordinates)
-  end
-
-  def header
-    <<~HEADER
-      =========KNIGHT MOVES=========
-
-        By Sean Garwood
-        Crofton, MD
-        February 15, 2023
-
-        matltc.com
-    HEADER
-  end
-
-  def bye
-    <<~BYE
-      ==============================
-
-             Thanks for playing!
-          If you're here from TOP,
-                keep at it!
-
-      ==============================
-    BYE
-  end
-
-  def to_s
-    <<~OUTPUT
-      #{header}
-      ------------------------------\n
-      place knight on #{knight}
-      arrive by #{target}
-      ------------------------------\n
-      one possible shortest path:\n
-      #{path.map(&:to_s).join.chomp}
-      #{bye}
-    OUTPUT
   end
 end

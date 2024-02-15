@@ -6,11 +6,12 @@ module Output
     <<~HEADER
       =========KNIGHT MOVES=========
 
-        By Sean Garwood
-        Crofton, MD
-        February 15, 2023
+            By Sean Garwood
+            Crofton, MD
+            February 15, 2023
 
-        matltc.com
+            matltc.com
+      ==============================
     HEADER
   end
 
@@ -29,10 +30,6 @@ module Output
   def to_s
     <<~OUTPUT
       #{header}
-      ------------------------------\n
-      place knight on #{knight}
-      arrive by #{target}
-      ------------------------------\n
       one possible shortest path:\n
       #{path.map(&:to_s).join.chomp}
       #{bye}
