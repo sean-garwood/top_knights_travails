@@ -21,7 +21,7 @@ module Move
     result
   end
 
-  def moves
+  def legal_moves
     moves = MOVES
     t = proc { |dx, dy| [x + dx, y + dy] }
     moves.reduce([]) do |legal, move|
@@ -32,12 +32,8 @@ module Move
     end
   end
 
-  def id_neighbors
-    adj_squares = moves
-  end
-
-  def find_path
-    squares = visit_all
-
+  def find_next(square)
+    candidates = unvisited.select { |s| square.moves.include?(s.coordinates) }
+    candidates.include?(target) ? target : candidates[0]
   end
 end

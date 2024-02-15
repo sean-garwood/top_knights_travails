@@ -4,6 +4,4 @@ require_relative 'lib/debug'
 require_relative 'lib/square'
 require_relative 'lib/board'
 
-chess = Board.new
-
-puts chess
+puts Board.new([0, 0], [7, 7])
