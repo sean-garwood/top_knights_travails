@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'lib/debug'
-require_relative 'lib/square'
-require_relative 'lib/board'
+require 'set'
 
-puts Board.new([0, 0], [7, 7])
+require_relative 'lib/coords'
+require_relative 'lib/debug'
+
+require_relative 'lib/square'
+require_relative 'lib/knight'
+
+puts KnightMoves.new
