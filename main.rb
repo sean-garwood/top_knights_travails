@@ -3,14 +3,14 @@
 require 'set'
 
 require_relative 'lib/coords'
-require_relative 'lib/debug'
 
 require_relative 'lib/square'
 require_relative 'lib/knight'
 
-# test_coords = -> { [rand(0..7), rand(0..7)] }
-# cycles = 3
+coord = -> { rand(0..7) }
+t_coords = -> { [coord.call, coord.call] }
+cycles = 30
 
-# cycles.times { puts KnightMoves.new(test_coords.call, test_coords.call) }
-
-puts KnightMoves.new
+cycles.times do
+  puts KnightMoves.new(t_coords.call, t_coords.call)
+end

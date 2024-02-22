@@ -8,35 +8,44 @@ module Output
 
             By Sean Garwood
             Crofton, MD
-            February 15, 2023
+            February 23, 2024
 
             matltc.com
-      ==============================
+      ------------------------------
     HEADER
   end
 
   def bye
     <<~BYE
-      ==============================
 
-             Thanks for playing!
-          If you're here from TOP,
-                keep at it!
+      ------------------------------
+
+         If you're here from TOP,
+               keep at it!
 
       ==============================
     BYE
   end
 
+  def params
+    <<~PARAMS
+      If the Knight starts at #{label(origin)}
+      and is destined for #{label(destination)}, it will
+      take #{number_of_moves} moves:
+    PARAMS
+  end
+
   def print_path
-    path.each { |c| puts c }
+    find_sq = ->(c) { label(c) }
+    path.each_with_index.map { |c, i| "#{i}. #{find_sq.call(c)}" }.join("\n")
   end
 
   def to_s
-    <<~OUTPUT
+    <<~EXIT
       #{header}
-      one possible shortest path:\n
+      #{params}
       #{print_path}
       #{bye}
-    OUTPUT
+    EXIT
   end
 end
