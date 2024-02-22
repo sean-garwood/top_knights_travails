@@ -27,11 +27,15 @@ module Output
     BYE
   end
 
+  def print_path
+    path.each { |c| puts c }
+  end
+
   def to_s
     <<~OUTPUT
       #{header}
       one possible shortest path:\n
-      ##{path.each { |c| puts c }}
+      #{print_path}
       #{bye}
     OUTPUT
   end

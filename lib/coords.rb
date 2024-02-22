@@ -38,11 +38,11 @@ module Coordinates
     coordinates
   end
 
-  def destination_square
-    visited.find { |s| s.coordinates == @destination }
+  def square_at(coords)
+    visited.find { |s| s.coordinates == coords }
   end
 
-  def unvisited_neighbors(board)
+  def unvisited_adjacent(board)
     valid & board.unvisited_coords
   end
 end

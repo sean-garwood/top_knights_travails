@@ -2,6 +2,6 @@
 
 # debug
 module Debug
-  K_POS = [7, 0]
-  T_POS = [2, 4]
+  T_POS = [0, 0]
+  K_POS = [7, 7]
 end
