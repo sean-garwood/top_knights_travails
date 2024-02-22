@@ -11,7 +11,7 @@ module Coordinates
   ].freeze
 
   def label(coords)
-    files[coords[0]] + ranks[coords[1]]
+    FILES[coords[0]] + RANKS[coords[1]]
   end
 
   def legal_moves
@@ -38,8 +38,11 @@ module Coordinates
     coordinates
   end
 
-  def unvisited_neighbors(square)
-    all = square.neighbors
-    all.select { |n| n.visited.nil? }
+  def destination_square
+    visited.find { |s| s.coordinates == @destination }
+  end
+
+  def unvisited_neighbors(board)
+    valid & board.unvisited_coords
   end
 end

@@ -4,12 +4,14 @@
 class Square
   include Coordinates
   attr_accessor :distance
-  attr_reader :coordinates, :neighboring_coords
+  attr_reader :coordinates, :name, :neighbors, :valid
 
-  def initialize(coordinates, distance = MAX_DISTANCE)
+  def initialize(board, coordinates, distance = MAX_DISTANCE)
+    @name = label(coordinates)
     @coordinates = coordinates
     @distance = distance
-    @neighboring_coords = legal_moves
+    @valid = legal_moves.to_set
+    @neighbors = unvisited_neighbors(board) unless @coordinates == board.destination
   end
 
   def to_s

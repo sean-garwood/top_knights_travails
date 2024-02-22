@@ -31,7 +31,7 @@ module Output
     <<~OUTPUT
       #{header}
       one possible shortest path:\n
-      ##{knight_moves.reverse.each { |s| puts s }}
+      ##{path.each { |c| puts c }}
       #{bye}
     OUTPUT
   end
